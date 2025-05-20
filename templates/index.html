@@ -1,0 +1,142 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Submission App</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: 2em auto; }
+    label { display: block; margin-top: 1em; }
+    input, select, textarea { width: 100%; padding: .5em; margin-top: .2em; }
+    .row { display: flex; gap: 1em; }
+    .row > div { flex: 1; }
+    button { margin-top: 1.5em; padding: .75em 1.5em; }
+  </style>
+</head>
+<body>
+  <h1>Order Submission</h1>
+  <form action="/submit" method="post" enctype="multipart/form-data">
+    <!-- Order Details -->
+    <fieldset>
+      <legend>Order Details</legend>
+      <label>
+        Company Name*
+        <input name="company_name" type="text" required />
+      </label>
+      <label>
+        Design Name*
+        <input name="design_name" type="text" required />
+      </label>
+      <div class="row">
+        <div>
+          <label>
+            Quantity*
+            <input name="quantity" type="number" min="1" required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Product*
+            <input name="product" type="text" required />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>
+            Due Date* (MM/DD)
+            <input name="due_date" type="text" placeholder="MM/DD" required />
+          </label>
+        </div>
+        <div>
+          <label>
+            Price*
+            <input name="price" type="number" step="0.01" required />
+          </label>
+        </div>
+      </div>
+      <label>
+        Hard/Soft Date*
+        <select name="date_type" required>
+          <option>Hard Date</option>
+          <option>Soft Date</option>
+        </select>
+      </label>
+      <label>
+        Referral
+        <input name="referral" type="text" />
+      </label>
+    </fieldset>
+
+    <!-- Materials -->
+    <fieldset>
+      <legend>Materials (up to 5)</legend>
+      <div class="row">
+        <div>
+          <label>Material 1*</label>
+          <input name="material1" type="text" required />
+        </div>
+        <div>
+          <label>Material 2</label>
+          <input name="material2" type="text" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Material 3</label>
+          <input name="material3" type="text" />
+        </div>
+        <div>
+          <label>Material 4</label>
+          <input name="material4" type="text" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Material 5</label>
+          <input name="material5" type="text" />
+        </div>
+        <div>
+          <label>Back Material</label>
+          <input name="back_material" type="text" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Additional Info -->
+    <fieldset>
+      <legend>Additional Info</legend>
+      <div class="row">
+        <div>
+          <label>Fur Color*</label>
+          <input name="fur_color" type="text" required />
+        </div>
+        <div>
+          <label>Backing Type*</label>
+          <input name="backing_type" type="text" required />
+        </div>
+      </div>
+      <label>
+        Notes
+        <textarea name="notes" rows="3"></textarea>
+      </label>
+    </fieldset>
+
+    <!-- File Uploads -->
+    <fieldset>
+      <legend>File Uploads</legend>
+      <label>
+        Production File(s)
+        <input name="prod_files" type="file" multiple />
+      </label>
+      <label>
+        Print File(s)
+        <input name="print_files" type="file" multiple />
+      </label>
+    </fieldset>
+
+    <button type="submit">Submit Order</button>
+  </form>
+</body>
+</html>

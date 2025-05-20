@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, ...  # whatever you need
+from flask import Flask, render_template, request, redirect, url_for
 
 
 import tkinter as tk
@@ -27,10 +27,34 @@ from PIL import Image, ImageTk, ImageOps
 import fitz
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route("/", methods=["GET"])
 def index():
-    # if you have an index.html in a /templates folder:
-    return render_template('index.html')
+    # this will render templates/index.html
+    return render_template("index.html")
+@app.route("/submit", methods=["POST"])
+def submit_order():
+    # grab all your form fields
+    company     = request.form["company_name"]
+    design      = request.form["design_name"]
+    quantity    = request.form["quantity"]
+    product     = request.form["product"]
+    due_date    = request.form["due_date"]
+    price       = request.form["price"]
+    date_type   = request.form["date_type"]
+    referral    = request.form.get("referral", "")
+    material1   = request.form["material1"]
+    material2   = request.form.get("material2", "")
+    material3   = request.form.get("material3", "")
+    material4   = request.form.get("material4", "")
+    material5   = request.form.get("material5", "")
+    back_mat    = request.form.get("back_material", "")
+    fur_color   = request.form["fur_color"]
+    backing     = request.form["backing_type"]
+    notes       = request.form.get("notes", "")
+
+    # grab uploaded files
+    prod_files  = request.files.getlist("prod_files")
+    print_files = request.files.getlist("print_files")
 
 # ===================== Global Variables & Helper Functions =====================
 
@@ -1869,3 +1893,5 @@ if __name__ == "__main__":
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
+
+    return redirect(url_for("index"))
