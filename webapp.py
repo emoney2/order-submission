@@ -1,3 +1,6 @@
+from flask import Flask, request, jsonify, render_template, ...  # whatever you need
+
+
 import tkinter as tk
 from tkinter import messagebox, filedialog, simpledialog
 from tkinter import ttk
@@ -22,6 +25,12 @@ from PIL import Image, ImageTk, ImageOps
 
 # For PDF rendering (PyMuPDF)
 import fitz
+app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def index():
+    # if you have an index.html in a /templates folder:
+    return render_template('index.html')
 
 # ===================== Global Variables & Helper Functions =====================
 
@@ -1857,3 +1866,6 @@ if __name__ == "__main__":
         import traceback
         traceback.print_exc()
         input("An error occurred. Press Enter to exit...")
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
