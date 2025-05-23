@@ -1,9 +1,11 @@
 Flask==2.2.3
 Werkzeug==2.2.3
 gunicorn
+flask-cors
 gspread
 oauth2client
 google-api-python-client
 gspread-formatting
 Pillow
 PyMuPDF
+
