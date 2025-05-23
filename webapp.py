@@ -8,6 +8,11 @@ from oauth2client.service_account import ServiceAccountCredentials
 app = Flask(__name__)
 CORS(app)  # allow all origins (Netlify ↔ Render)
 
+# ─── Health check ─────────────────────────────────────────────────────────
+@app.route("/healthz")
+def healthz():
+    return "OK", 200
+
 # ─── Google Sheets auth ──────────────────────────────────────────────────
 # path to your JSON key (upload it or point to env)
 KEYFILE = os.environ.get("GOOGLE_CREDENTIALS_FILE", "credentials.json")
@@ -31,10 +36,7 @@ def submit():
     sheet.append_row(row, value_input_option="RAW")
     return jsonify({"status":"ok"}), 200
 
-# ─── Health check ─────────────────────────────────────────────────────────
-@app.route("/healthz")
-def healthz():
-    return "OK", 200
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
